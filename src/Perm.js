@@ -5,6 +5,9 @@
 function permAlone(str) {
     var perms = [];
 
+    if (!str) {
+        return 0;
+    }
     getPerm('', str);
 
     function swap (s, i, j) {
@@ -33,4 +36,5 @@ function permAlone(str) {
     return perms.length;
 }
 
-permAlone('abcdddefg');
+//permAlone('abcdddefg');
+exports.permAlone = permAlone;
