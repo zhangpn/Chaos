@@ -23,11 +23,11 @@ function getChange(price, cash, cid) {
   var returnCash = [];
   for (var i = cid.length - 1; i >= 0; --i) {
       var currentChange = change >= cid[i][1] ? cid[i][1] : Math.floor((change / CHANGETYPES[i]).toFixed(2)) * CHANGETYPES[i]; 
-      if (currentChange > 0) {
+      if (currentChange >= 0) {
         returnCash.push([cid[i][0], currentChange]);
       }
       change -= currentChange;
-      if (parseInt(change * 100) <= 0) {
+      if (parseInt(change * 100) < 0) {
           break;
       }
   }

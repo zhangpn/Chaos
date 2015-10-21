@@ -11,6 +11,7 @@
   "devDependencies": {
     "chai": "^3.3.0",
     "commander": "^2.8.1",
+    "fs-extra": "^0.24.0",
     "mocha": "^2.3.3"
   }
 }
