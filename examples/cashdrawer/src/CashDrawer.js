@@ -6,37 +6,31 @@ Otherwise, return change in coin and bills, sorted in highest to lowest order.
 */
 
 function getChange(price, cash, cid) {
-  var CHANGETYPES = [0.01, 0.05, 0.10, 0.25, 1, 5, 10, 20, 100];
-  var change = cash - price; 
-  var totalCash = cid.reduce(function(a,b) {
-      return ['total', (a[1] + b[1]) * 100 / 100];
-  });
-  
-  if (totalCash[1] < change) {
-      return "Insufficient Funds";
-  }
-  
-  if (totalCash[1] === change) {
-      return "Closed";
-  }
-  
-  var returnCash = [];
-  for (var i = cid.length - 1; i >= 0; --i) {
-      var currentChange = change >= cid[i][1] ? cid[i][1] : Math.floor((change / CHANGETYPES[i]).toFixed(2)) * CHANGETYPES[i]; 
-      if (currentChange >= 0) {
-        returnCash.push([cid[i][0], currentChange]);
-      }
-      change -= currentChange;
-      if (parseInt(change * 100) < 0) {
-          break;
-      }
-  }
-  
-  // Here is your change, ma'am.
-  return returnCash;
+    var CHANGETYPES = [0.01, 0.05, 0.10, 0.25, 1, 5, 10, 20, 100];
+    var change = cash - price;
+    var totalCash = cid.reduce(function(a,b) {
+        return ['total', (a[1] + b[1]) * 100 / 100];
+    });
+    if (totalCash[1] < change) {
+        return "Insufficient Funds";
+    }
+    if (totalCash[1] === change) {
+        return "Closed";
+    }
+    var returnCash = [];
+    for (var i = cid.length - 1; i >= 0; --i) {
+        var currentChange = change >= cid[i][1] ? cid[i][1]
+            : Math.floor((change / CHANGETYPES[i]).toFixed(2)) * CHANGETYPES[i];
+        if (currentChange > 0) {
+            returnCash.push([cid[i][0], currentChange]);
+        }
+        change -= currentChange;
+        if (parseInt(change * 100) <= 0) {
+            break;
+        }
+    }
+    return returnCash;
 }
-
-
 exports.getChange = getChange;
 
 
