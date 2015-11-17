@@ -152,6 +152,9 @@ function generateEvilRepos(repoPath, dataContent) {
                 }
                 ++i;
                 ++v;
+                if (dataContent[key].evilVersions.length === 0) {
+                    delete dataContent[key];
+                }
             }
         }
     }
